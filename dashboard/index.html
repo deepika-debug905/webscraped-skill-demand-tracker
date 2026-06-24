@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Market & Skill Demand Predictor | Portfolio Insights</title>
+    <title>Job Market & Skill Demand Predictor | Full-Stack Insights</title>
     <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,7 +53,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
             border-bottom: 1px solid var(--card-border);
             padding-bottom: 20px;
         }
@@ -92,6 +92,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            user-select: none;
         }
 
         .btn:hover {
@@ -109,6 +110,103 @@
         .btn-primary:hover {
             background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
             box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Navigation Tabs */
+        .tabs-nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            background: rgba(20, 26, 46, 0.4);
+            border: 1px solid var(--card-border);
+            padding: 6px;
+            border-radius: 12px;
+            width: fit-content;
+        }
+
+        .tab-btn {
+            font-family: 'Outfit', sans-serif;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .tab-btn.active {
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Dynamic Filter Bar */
+        .filter-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 16px 24px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .filter-group select {
+            background: rgba(10, 15, 30, 0.8);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            padding: 8px 14px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-group select:focus {
+            border-color: var(--accent-blue);
+            outline: none;
         }
 
         /* KPI Cards */
@@ -230,50 +328,400 @@
             justify-content: center;
         }
 
+        /* Loading Skeleton */
+        .loading-skeleton {
+            background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
         /* Error/Loading State */
         .no-data-msg {
             text-align: center;
             color: var(--text-secondary);
             padding: 40px;
             border: 1px dashed var(--card-border);
-            border-radius: 8px;
+            border-radius: 16px;
             margin: 40px 0;
+            background: var(--card-bg);
         }
 
-        /* Print styles for market_insights.pdf generation */
-        @media print {
-            body {
-                background: white;
-                color: #111827;
-                padding: 10px;
+        /* Job Explorer Tab Layout */
+        .explorer-layout {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .explorer-layout {
+                grid-template-columns: 1fr;
             }
-            :root {
-                --card-bg: #ffffff;
-                --card-border: #e5e7eb;
-                --text-primary: #111827;
-                --text-secondary: #4b5563;
+        }
+
+        .jobs-list-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .jobs-search-bar {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .jobs-search-bar {
+                grid-template-columns: 1fr;
             }
-            .btn, .actions {
-                display: none !important;
+        }
+
+        .jobs-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 200px;
+        }
+
+        .job-item-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .job-item-card:hover {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.05);
+            transform: translateX(6px);
+        }
+
+        .job-item-card.active {
+            border-color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.08);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.1);
+        }
+
+        .job-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .job-item-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .job-item-company {
+            color: var(--accent-blue);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 3px;
+        }
+
+        .job-item-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .job-item-salary {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .job-item-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .skill-badge {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            padding: 3px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .skill-badge.matched {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: var(--accent-green);
+        }
+
+        .job-detail-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 24px;
+            position: sticky;
+            top: 20px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .job-detail-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .job-detail-company {
+            font-size: 1.05rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        .job-detail-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            background: rgba(255,255,255,0.02);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.04);
+            margin-top: 10px;
+        }
+
+        .detail-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .detail-meta-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .detail-meta-value {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .detail-meta-value.salary {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        .job-detail-section {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 18px;
+        }
+
+        .job-detail-section h4 {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .job-detail-desc {
+            line-height: 1.6;
+            font-size: 0.92rem;
+            color: #d1d5db;
+            white-space: pre-line;
+        }
+
+        /* SQL Playground Layout */
+        .sql-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .sql-layout {
+                grid-template-columns: 1fr;
             }
-            .kpi-card, .chart-card {
-                border: 1px solid #d1d5db !important;
-                box-shadow: none !important;
-                background: white !important;
-                page-break-inside: avoid;
-            }
-            .header-title h1 {
-                background: none;
-                -webkit-text-fill-color: initial;
-                color: #1f2937;
-            }
-            .chart-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-                gap: 15px !important;
-            }
-            .chart-container {
-                min-height: 200px !important;
-            }
+        }
+
+        .sql-sidebar {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            backdrop-filter: blur(12px);
+        }
+
+        .sql-sidebar-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 8px;
+        }
+
+        .sql-presets-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sql-preset-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            padding: 12px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            line-height: 1.4;
+        }
+
+        .sql-preset-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.04);
+            transform: translateY(-1px);
+        }
+
+        .sql-editor-container {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            backdrop-filter: blur(12px);
+        }
+
+        .sql-editor-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sql-editor-wrapper {
+            position: relative;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            overflow: hidden;
+        }
+
+        .sql-textarea {
+            width: 100%;
+            height: 180px;
+            background: #060913;
+            color: #60a5fa;
+            border: none;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            padding: 15px;
+            resize: vertical;
+            outline: none;
+            line-height: 1.5;
+        }
+
+        .sql-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sql-results-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sql-results-panel {
+            background: #060913;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            overflow-x: auto;
+            max-height: 380px;
+            min-height: 80px;
+            position: relative;
+        }
+
+        .sql-results-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .sql-results-table th {
+            background: rgba(20, 30, 55, 0.8);
+            color: var(--text-primary);
+            padding: 12px 14px;
+            border-bottom: 2px solid var(--card-border);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .sql-results-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+        }
+
+        .sql-results-table tr:hover td {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .sql-status-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px 14px;
+            border-radius: 6px;
+        }
+
+        .sql-status-bar.error {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.15);
         }
 
         /* Resume Matcher Styles */
@@ -283,7 +731,6 @@
             backdrop-filter: blur(12px);
             border-radius: 16px;
             padding: 28px;
-            margin-bottom: 40px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -422,6 +869,69 @@
         .gap-skill { font-weight: 600; }
         .gap-value { color: var(--accent-green); font-weight: 500; }
         .gap-value.matched { color: var(--text-secondary); }
+
+        /* General Utils */
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .pagination-info {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .pagination-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: #111827;
+                padding: 10px;
+            }
+            :root {
+                --card-bg: #ffffff;
+                --card-border: #e5e7eb;
+                --text-primary: #111827;
+                --text-secondary: #4b5563;
+            }
+            .btn, .actions, .tabs-nav, .filter-bar, .jobs-search-bar, .pagination-container, .sql-sidebar, .sql-editor-container {
+                display: none !important;
+            }
+            .kpi-card, .chart-card, .jobs-list-panel, .job-detail-panel {
+                border: 1px solid #d1d5db !important;
+                box-shadow: none !important;
+                background: white !important;
+                page-break-inside: avoid;
+            }
+            .header-title h1 {
+                background: none;
+                -webkit-text-fill-color: initial;
+                color: #1f2937;
+            }
+            .chart-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 15px !important;
+            }
+            .chart-container {
+                min-height: 200px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -429,141 +939,307 @@
         <!-- Dashboard Header -->
         <header>
             <div class="header-title">
-                <h1 id="dashboard-title">Job Market & Skill Demand Predictor</h1>
-                <p id="dashboard-subtitle">Regional Analytics Market Intelligence & Strategic Workforce Dashboard</p>
+                <h1>Job Market & Skill Demand Predictor</h1>
+                <p>Regional Analytics Market Intelligence & Strategic Workforce Dashboard</p>
             </div>
             <div class="actions">
                 <button class="btn" onclick="window.print()">
                     <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2m7 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
                     </svg>
-                    Export Report PDF
+                    Print Report / PDF
                 </button>
             </div>
         </header>
 
-        <!-- KPI Counters -->
-        <div class="kpi-grid" id="kpi-container">
-            <!-- Statically populated placeholders to display if JSON is still loading or running local -->
-            <div class="kpi-card blue">
-                <div class="kpi-label">Market Openings Analyzed</div>
-                <div class="kpi-value" id="kpi-total-jobs">-</div>
-                <div class="kpi-trend trend-up">▲ Active Pipeline</div>
-            </div>
-            <div class="kpi-card purple">
-                <div class="kpi-label">Average Annual Salary</div>
-                <div class="kpi-value" id="kpi-avg-salary">-</div>
-                <div class="kpi-trend trend-up">▲ Regional Target Rate</div>
-            </div>
-            <div class="kpi-card green">
-                <div class="kpi-label">Most In-Demand Skill</div>
-                <div class="kpi-value" id="kpi-top-skill">-</div>
-                <div class="kpi-trend trend-neutral">■ Highest Frequency</div>
-            </div>
-        </div>
+        <!-- Navigation Tabs -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-tab="dashboard">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16" style="margin-top:-2px">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1h2a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4 4a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5zm4 5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+                Analytics
+            </button>
+            <button class="tab-btn" data-tab="explorer">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16" style="margin-top:-2px">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+                Job Explorer
+            </button>
+            <button class="tab-btn" data-tab="sql">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16" style="margin-top:-2px">
+                    <path d="M1 2.5A2.5 2.5 0 0 1 3.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 1 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 0 1-1.072 1.05A2.495 2.495 0 0 1 1 11.5zM2.5 2v7.28a3 3 0 0 1 1-.28h7V1.5H3.5A1 1 0 0 0 2.5 2.5"/>
+                </svg>
+                SQL Playground
+            </button>
+            <button class="tab-btn" data-tab="ml">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 16 16" style="margin-top:-2px">
+                    <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5v-5A3.5 3.5 0 0 0 10.5 2zM8 5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V5.5A.5.5 0 0 1 8 5"/>
+                </svg>
+                Resume Estimator
+            </button>
+        </nav>
 
-        <!-- Fallback message if data file is missing -->
+        <!-- Dynamic Indicator Banner if API fails or falls back -->
         <div id="no-data-alert" class="no-data-msg" style="display: none;">
-            <h3>No Live Data File Detected</h3>
-            <p style="margin-top: 10px;">Please run the pipeline script to populate the dashboard: <code>python scripts/generate_demo.py</code></p>
+            <h3>Running in Pipeline Demo Mode (Static Fallback)</h3>
+            <p style="margin-top: 10px;">To enable the complete interactive full-stack app (searchable jobs, live database queries, and ML prediction), start the FastAPI server: <code>uvicorn scripts.api_server:app --reload</code></p>
         </div>
 
-        <!-- Resume Matcher and Salary Predictor -->
-        <div class="matcher-section">
-            <h3 class="matcher-title">Interactive Resume Matcher & ML Salary Estimator</h3>
-            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 5px;">Paste your resume text below to run natural language keyword parsing against the SQLite job market database. The interactive interface uses our Multiple Linear Regression model weights to calculate your market value and conduct a gap skills analysis.</p>
-            
-            <div class="matcher-grid">
-                <div class="matcher-form">
-                    <div class="form-group">
-                        <label for="resume-input">Resume Text / Bio</label>
-                        <textarea id="resume-input" class="form-control" placeholder="Paste your resume content here... E.g. 'I am a data analyst skilled in SQL, Python, Excel and Tableau.'"></textarea>
+        <!-- ================= TAB 1: ANALYTICS ================= -->
+        <div id="view-dashboard" class="tab-view fade-in">
+            <!-- Analytics Filter Bar -->
+            <div class="filter-bar">
+                <div class="filter-left">
+                    <span class="filter-title">Filter Dashboard</span>
+                    <div class="filter-group">
+                        <label for="dashboard-filter-industry">Industry:</label>
+                        <select id="dashboard-filter-industry">
+                            <option value="">All Industries</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="experience-input">Years of Analytics Experience</label>
-                        <input type="number" id="experience-input" class="form-control" min="0" max="30" value="1">
+                    <div class="filter-group">
+                        <label for="dashboard-filter-location">Location:</label>
+                        <select id="dashboard-filter-location">
+                            <option value="">All Locations</option>
+                        </select>
                     </div>
-                    <button class="btn btn-primary" id="btn-match" style="padding: 12px; justify-content: center;">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 5px;">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </div>
+                <button class="btn" id="btn-clear-filters" style="padding: 6px 12px; font-size: 0.8rem;">
+                    Clear Filters
+                </button>
+            </div>
+
+            <!-- KPI Counters -->
+            <div class="kpi-grid" id="kpi-container">
+                <div class="kpi-card blue">
+                    <div class="kpi-label">Market Openings Analyzed</div>
+                    <div class="kpi-value" id="kpi-total-jobs">-</div>
+                    <div class="kpi-trend trend-up">▲ Active Pipeline</div>
+                </div>
+                <div class="kpi-card purple">
+                    <div class="kpi-label">Average Annual Salary</div>
+                    <div class="kpi-value" id="kpi-avg-salary">-</div>
+                    <div class="kpi-trend trend-up">▲ Regional Target Rate</div>
+                </div>
+                <div class="kpi-card green">
+                    <div class="kpi-label">Most In-Demand Skill</div>
+                    <div class="kpi-value" id="kpi-top-skill">-</div>
+                    <div class="kpi-trend trend-neutral">■ Highest Frequency</div>
+                </div>
+            </div>
+
+            <!-- Charts Dashboard Grid -->
+            <div class="chart-grid" id="dashboard-grid">
+                <!-- Chart 1: BI Battle -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">The Visualization Landscape</h3>
+                        <p class="chart-subtitle">Market demand comparison: Power BI vs. Tableau</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-bi-battle"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Premium Skills -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">The Premium Skill Stack</h3>
+                        <p class="chart-subtitle">Average salary distribution correlated with skill tags</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-premium-skills"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 3: Industry Concentration -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Market Concentration</h3>
+                        <p class="chart-subtitle">Hiring volume and recruitment distribution by industry</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-industries"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 4: Experience vs Salary -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Career Velocity Bounds</h3>
+                        <p class="chart-subtitle">Salary range distribution across experience levels</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-experience-salary"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TAB 2: JOB EXPLORER ================= -->
+        <div id="view-explorer" class="tab-view fade-in" style="display: none;">
+            <div class="explorer-layout">
+                <!-- Left panel: Search filters & job list -->
+                <div class="jobs-list-panel">
+                    <div class="jobs-search-bar">
+                        <input type="text" id="job-search-input" class="form-control" placeholder="Search titles, companies, descriptions...">
+                        <select id="job-filter-location" class="form-control">
+                            <option value="">All Locations</option>
+                        </select>
+                        <select id="job-filter-skill" class="form-control">
+                            <option value="">All Skills</option>
+                            <option value="SQL">SQL</option>
+                            <option value="Python">Python</option>
+                            <option value="Tableau">Tableau</option>
+                            <option value="Power BI">Power BI</option>
+                            <option value="Excel">Excel</option>
+                            <option value="Machine Learning">Machine Learning</option>
+                        </select>
+                        <select id="job-filter-experience" class="form-control">
+                            <option value="">All Experience</option>
+                            <option value="Entry">Entry (0-2 yrs)</option>
+                            <option value="Mid">Mid (3-5 yrs)</option>
+                            <option value="Senior">Senior (6+ yrs)</option>
+                            <option value="Unspecified">Unspecified</option>
+                        </select>
+                    </div>
+
+                    <div class="jobs-list-container" id="jobs-list-container">
+                        <!-- Loaded dynamically -->
+                    </div>
+
+                    <div class="pagination-container">
+                        <div class="pagination-info" id="jobs-pagination-info">Showing 0 of 0 jobs</div>
+                        <div class="pagination-buttons" id="jobs-pagination-buttons">
+                            <!-- Prev/Next loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right panel: Job details preview -->
+                <div class="job-detail-panel" id="job-detail-panel">
+                    <div style="color: var(--text-secondary); text-align: center; padding: 40px 0;">
+                        <svg width="48" height="48" fill="currentColor" viewBox="0 0 16 16" style="opacity: 0.3; margin-bottom: 15px;">
+                            <path d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z"/>
+                            <path d="M4.5 10.5A.5.5 0 0 1 5 10h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
                         </svg>
-                        Analyze Resume & Predict Value
-                    </button>
-                </div>
-                
-                <div class="matcher-results" id="matcher-results-panel">
-                    <div class="results-grid">
-                        <div class="result-kpi">
-                            <div class="result-kpi-label">Market Fit Score</div>
-                            <div class="result-kpi-value green" id="match-score">0%</div>
-                        </div>
-                        <div class="result-kpi">
-                            <div class="result-kpi-label">Estimated Value</div>
-                            <div class="result-kpi-value blue" id="predicted-salary">$0</div>
-                        </div>
-                    </div>
-                    <div class="gap-analysis">
-                        <h4>Strategic Skill Stack Evaluation</h4>
-                        <ul class="gap-list" id="gap-skills-list">
-                            <li style="color: var(--text-secondary); font-size: 0.85rem; text-align: center; padding: 20px 0;">Paste your resume details and click analyze to calculate.</li>
-                        </ul>
+                        <p>Select a job posting to view full details, requirements, and skill analysis.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Charts Dashboard Grid -->
-        <div class="chart-grid" id="dashboard-grid">
-            <!-- Chart 1: BI Battle -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3 class="chart-title">The Visualization Landscape</h3>
-                    <p class="chart-subtitle">Market demand comparison: Power BI vs. Tableau</p>
+        <!-- ================= TAB 3: SQL PLAYGROUND ================= -->
+        <div id="view-sql" class="tab-view fade-in" style="display: none;">
+            <div class="sql-layout">
+                <!-- Left panel: Preset analyst queries -->
+                <div class="sql-sidebar">
+                    <h4 class="sql-sidebar-title">Preset Analyst Queries</h4>
+                    <div class="sql-presets-list">
+                        <button class="sql-preset-btn" data-query-id="industry-avg">
+                            <strong>Industry Performance</strong><br>
+                            Avg salary & openings by industry
+                        </button>
+                        <button class="sql-preset-btn" data-query-id="skill-demand-exp">
+                            <strong>Skills & Experience</strong><br>
+                            Skill count grouped by career levels
+                        </button>
+                        <button class="sql-preset-btn" data-query-id="highest-paying">
+                            <strong>Top Paying Positions</strong><br>
+                            List maximum salary postings & skills
+                        </button>
+                        <button class="sql-preset-btn" data-query-id="skill-cooccurrence">
+                            <strong>Skill Synergies</strong><br>
+                            Common skills requested together
+                        </button>
+                        <button class="sql-preset-btn" data-query-id="geographic">
+                            <strong>Geographic Density</strong><br>
+                            Hiring counts and salaries by city
+                        </button>
+                    </div>
                 </div>
-                <div class="chart-container">
-                    <canvas id="chart-bi-battle"></canvas>
+
+                <!-- Right panel: SQL Editor & Output Table -->
+                <div class="sql-editor-container">
+                    <div class="sql-editor-title">Interactive Data Analyst SQL Sandbox</div>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top:-5px">Execute read-only SQL commands directly on the 3NF SQLite database. Query tables: <code>job_postings</code>, <code>companies</code>, and <code>skills_required</code>.</p>
+                    
+                    <div class="sql-editor-wrapper">
+                        <textarea class="sql-textarea" id="sql-query-input" placeholder="-- Write SQL SELECT queries here...&#10;SELECT * FROM job_postings LIMIT 5;"></textarea>
+                    </div>
+
+                    <div class="sql-actions">
+                        <button class="btn btn-primary" id="btn-run-sql">
+                            <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="margin-top:-2px">
+                                <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                            </svg>
+                            Execute Query
+                        </button>
+                        <button class="btn" id="btn-export-sql-csv" style="display: none;">
+                            Export to CSV
+                        </button>
+                    </div>
+
+                    <div class="sql-results-container">
+                        <div class="sql-status-bar" id="sql-status">Ready. Select a preset query or write your own.</div>
+                        <div class="sql-results-panel">
+                            <table class="sql-results-table" id="sql-results-table">
+                                <!-- Dynamically populated rows -->
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Chart 2: Premium Skills -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3 class="chart-title">The Premium Skill Stack</h3>
-                    <p class="chart-subtitle">Average salary distribution correlated with skill tags</p>
-                </div>
-                <div class="chart-container">
-                    <canvas id="chart-premium-skills"></canvas>
-                </div>
-            </div>
-
-            <!-- Chart 3: Industry Concentration -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3 class="chart-title">Market Concentration</h3>
-                    <p class="chart-subtitle">Hiring volume and recruitment distribution by industry</p>
-                </div>
-                <div class="chart-container">
-                    <canvas id="chart-industries"></canvas>
-                </div>
-            </div>
-
-            <!-- Chart 4: Experience vs Salary -->
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h3 class="chart-title">Career Velocity Bounds</h3>
-                    <p class="chart-subtitle">Salary range distribution across experience levels</p>
-                </div>
-                <div class="chart-container">
-                    <canvas id="chart-experience-salary"></canvas>
+        <!-- ================= TAB 4: RESUME MATCH & ESTIMATION ================= -->
+        <div id="view-ml" class="tab-view fade-in" style="display: none;">
+            <div class="matcher-section">
+                <h3 class="matcher-title">Interactive Resume Matcher & ML Salary Estimator</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 5px;">Paste your resume text below to run natural language keyword parsing against the SQLite job market database. The interactive interface uses our Multiple Linear Regression model weights to calculate your market value and conduct a gap skills analysis.</p>
+                
+                <div class="matcher-grid">
+                    <div class="matcher-form">
+                        <div class="form-group">
+                            <label for="resume-input">Resume Text / Bio</label>
+                            <textarea id="resume-input" class="form-control" placeholder="Paste your resume content here... E.g. 'I am a data analyst skilled in SQL, Python, Excel and Tableau.'"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience-input">Years of Analytics Experience</label>
+                            <input type="number" id="experience-input" class="form-control" min="0" max="30" value="1">
+                        </div>
+                        <button class="btn btn-primary" id="btn-match" style="padding: 12px; justify-content: center;">
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 5px;">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                            </svg>
+                            Analyze Resume & Predict Value
+                        </button>
+                    </div>
+                    
+                    <div class="matcher-results" id="matcher-results-panel">
+                        <div class="results-grid">
+                            <div class="result-kpi">
+                                <div class="result-kpi-label">Market Fit Score</div>
+                                <div class="result-kpi-value green" id="match-score">0%</div>
+                            </div>
+                            <div class="result-kpi">
+                                <div class="result-kpi-label">Estimated Value</div>
+                                <div class="result-kpi-value blue" id="predicted-salary">$0</div>
+                            </div>
+                        </div>
+                        <div class="gap-analysis">
+                            <h4>Strategic Skill Stack Evaluation</h4>
+                            <ul class="gap-list" id="gap-skills-list">
+                                <li style="color: var(--text-secondary); font-size: 0.85rem; text-align: center; padding: 20px 0;">Paste your resume details and click analyze to calculate.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Model regression weights script -->
-    <script src="salary_model.js"></script>
-    <!-- Data script: Load data globally to bypass local CORS rules -->
-    <script src="dashboard_data.js"></script>
     <!-- Application logic -->
     <script src="app.js"></script>
 </body>
